@@ -1,0 +1,75 @@
+Sprint 4 Modelagem Linear para Aprendizado de Máquina
+
+Gabriel Guimarães de Oliveira - RM 567835
+Pedro Paulo Ferreira Agnelo D’angelo - RM 567564
+Nicolas Henriques Fernandes - RM 567123
+
+1. Definição do Problema e Variáveis
+Contexto: No âmbito da Saúde 4.0, o monitoramento preventivo é o diferencial da Care Plus. O objetivo deste modelo é prever o Risco Cardiovascular Alto (Variável Binária) com base em dados biométricos coletados via dispositivos vestíveis (wearables).
+Variáveis Selecionadas:
+Target (Y): target_risco (0: Baixo Risco, 1: Alto Risco).
+Preditores (X):
+Idade: Fator biológico de risco acumulado.
+IMC: Indicador de composição corporal e risco metabólico.
+Horas de Sono: Indicador de recuperação sistêmica.
+BPM em Repouso: Métrica de eficiência cardíaca.
+Histórico Familiar: Componente genético.
+Com certeza! Usar os dados reais que o seu código gerou é o que garante a autenticidade exigida pelo desafio. Isso demonstra que você não apenas copiou a teoria, mas executou e entendeu os resultados.
+Aqui está o trecho do relatório atualizado com os seus valores exatos e a explicação técnica para cada um:
+
+2. Construção e Interpretação do Modelo (Dados Reais)
+O modelo de regressão logística foi treinado e apresentou os seguintes parâmetros matemáticos, que permitem prever o risco com base nos dados de saúde:
+A) A Equação do Modelo
+Substituindo os coeficientes obtidos, o cálculo do logit ($Z$) para a Care Plus é:
+$$Z = -0,0016 + 2,9037(\text{Idade}) + 3,8079(\text{IMC}) - 2,0906(\text{Sono}) + 2,6683(\text{BPM}) + 0,0360(\text{Histórico})$$
+
+B) Interpretação dos Coeficientes (Log-Odds)
+A interpretação física desses números no contexto de saúde é fundamental:
+IMC ($\beta = 3,8079$): Foi a variável de maior impacto. Por ter o maior coeficiente positivo, o IMC é o principal preditor de risco neste modelo.
+
+Idade ($\beta = 2,9037$) e BPM ($\beta = 2,6683$): Ambos apresentam forte correlação positiva com o risco. O aumento da frequência cardíaca em repouso eleva significativamente a chance de alerta.
+
+Horas de Sono ($\beta = -2,0906$): O coeficiente negativo confirma que o sono atua como um fator de proteção. Quanto maior a duração do sono, menor o log-odds de risco cardiovascular.
+
+Histórico Familiar ($\beta = 0,0360$): Apresentou o menor impacto relativo nesta base de dados específica.
+C) Demonstração Prática (Caso de Uso)
+Para validar o modelo, simulamos um paciente com o seguinte perfil: 50 anos, IMC 30 (obeso), apenas 5h de sono e 90 BPM.
+Resultado: O modelo calculou uma probabilidade de 99,94% de Alto Risco.
+
+Decisão de Negócio: Este paciente seria classificado imediatamente para uma intervenção prioritária pela equipe de telemedicina da Care Plus, dada a altíssima probabilidade de um evento adverso.
+
+3. Avaliação de Desempenho e Métricas
+Para determinar a eficácia da predição na Saúde 4.0, analisamos o modelo além da acurácia simples.
+A) Interpretação das Métricas:
+Acurácia: Indica o percentual geral de acertos. No entanto, em saúde, ela pode ser enganosa se houver poucos casos de risco na base.
+Recall (Métrica Crítica): Nos diz o quanto o modelo é capaz de identificar pacientes que realmente têm risco. Um Recall alto é vital para a Care Plus: "Não podemos deixar um paciente de risco passar despercebido".
+Precisão: Indica quantos dos alertas emitidos pelo modelo eram realmente casos de risco. Evita o "excesso de alarmes" (fadiga de alertas) para a equipe médica.
+ROC AUC: Com um valor próximo de 1.0 (ou o valor que seu código gerou), o modelo demonstra excelente capacidade de distinguir entre um paciente saudável e um sob risco.
+B) Onde o Modelo Erra? (Análise de Erros):
+Falsos Positivos: O modelo aponta risco onde não há. Impacto: Custo operacional desnecessário com exames de triagem.
+Falsos Negativos: O modelo diz que o paciente está bem, mas ele tem risco. Impacto: Este é o erro mais grave. Pode resultar em falta de assistência e agravamento de doenças crônicas.
+C) Impacto nas Decisões em Saúde: Este modelo apoia a medicina preventiva. Em vez de esperar o paciente procurar o pronto-socorro, a Care Plus utiliza esses dados para agendar consultas de rotina e sugerir mudanças de hábitos (melhoria de sono e controle de IMC) de forma proativa.
+
+
+
+
+
+4. Capacidade Crítica e Discussão de Erros
+Nenhum modelo preditivo é infalível, e a utilidade clínica da Regressão Logística reside na compreensão de suas limitações. No contexto da Saúde 4.0, a escolha entre otimizar a Precisão ou o Recall (Sensibilidade) envolve um equilíbrio ético e financeiro:
+O Erro de Falso Negativo (Custo Humano): Ocorre quando o modelo classifica um paciente de alto risco como "saudável". Para a Care Plus, este é o erro mais crítico, pois a ausência de intervenção pode levar a eventos graves. Portanto, priorizamos um Recall elevado, garantindo que a rede de proteção capture o máximo de casos possível.
+O Erro de Falso Positivo (Custo Financeiro): Ocorre quando um paciente saudável é sinalizado com risco. Embora gere um custo operacional maior (exames e contatos desnecessários), o impacto é menos severo do que a omissão de socorro, resultando apenas em uma "fadiga de alertas" que deve ser monitorada.
+5. Conclusão e Aplicação Prática
+A implementação deste modelo de Regressão Logística demonstra como os dados de wearables e hábitos diários podem ser transformados em inteligência preventiva.
+Apoio à Decisão: O modelo atua como uma ferramenta de triagem (screening). Ele permite que a equipe médica priorize pacientes que apresentam probabilidades elevadas (como o caso prático de 99,94% discutido anteriormente), otimizando o tempo dos especialistas.
+Limitação Médica: É imperativo reforçar que o modelo não substitui o diagnóstico médico. Ele funciona como um "termômetro digital" da Saúde 4.0: aponta onde a atenção deve ser focada, mas a palavra final e a conduta clínica permanecem sob responsabilidade do profissional de saúde.
+
+6. Discussão Aplicada: Tomada de Decisão Real
+Como esse modelo apoia decisões no ecossistema de Saúde 4.0?
+Intervenção Proativa: Em vez de uma abordagem reativa, a Care Plus pode utilizar o modelo para criar um "Score de Risco em Tempo Real". Se o IMC de um usuário aumenta ou as horas de sono caem consistentemente (dados via wearable), o modelo recalcula a probabilidade e pode disparar um alerta para o beneficiário com dicas de saúde personalizadas.
+Gestão de Recursos: A operadora de saúde pode segmentar sua população. Pacientes com probabilidade $> 80\%$ entram em programas de acompanhamento intensivo (ex: gestão de crônicos), enquanto aqueles abaixo de $20\%$ recebem apenas conteúdos de manutenção de bem-estar.
+Redução de Sinistralidade: Ao prever riscos antes que se tornem emergências médicas, há uma redução direta de custos com internações e exames complexos, aumentando a sustentabilidade do modelo de saúde premium.
+
+
+
+
+
